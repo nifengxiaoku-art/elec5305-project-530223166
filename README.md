@@ -87,4 +87,16 @@ The main final result will be a learning curve showing:
 
 Macro-F1 vs. Number of labelled examples per class
 
+## Current
+Preliminary zero-shot result on ESC-50 fold 5:
+
+Accuracy: 0.9125
+Macro-F1: 0.9029
+Main confusion was observed for hen, while most other animal categories were classified correctly.
+setup Python env
+install dependencies
+download ESC-50
+run CLAP test
+run dataset loader
+run zero-shot experiment
 
