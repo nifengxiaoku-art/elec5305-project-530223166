@@ -59,12 +59,3 @@ The zero-shot experiment on ESC-50 fold 5 achieved:
 
 The main confusion was observed for the hen class, while most other animal categories were correctly recognised.
 
-## Repository contents
-- src/test_clap.py: verify CLAP loads and generates fixed text embeddings
-- src/load_esc50.py: load and filter ESC-50 metadata for the 10 animal categories
-- src/zero_shot.py: zero-shot CLAP classification on an official ESC-50 fold
-- results/: saved metric and confusion-matrix outputs
-
-## Notes
-- Raw ESC-50 audio files and the Python virtual environment are not uploaded to GitHub.
-- The project code and result files are intended for version control and reproducibility.
