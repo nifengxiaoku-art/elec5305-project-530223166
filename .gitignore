@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+# local raw dataset and downloaded assets
+data/
+
+# local workspace noise
+.DS_Store

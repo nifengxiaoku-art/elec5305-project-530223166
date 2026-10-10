@@ -1,26 +1,12 @@
-# elec5305-project-530223166
+# ELEC5305 Project - Animal Sound Classification Using a Pretrained Audio-Language Model
 
-ELEC5305 Project - Animal Sound Classification Using a Pretrained Audio-Language Model
+This project studies animal sound category classification using the ESC-50 dataset and Microsoft CLAP (Contrastive Language-Audio Pretraining).
 
-## Project Overview
-
-This project investigates animal sound category classification using the ESC-50 dataset.
-
-Instead of training a CNN from scratch, this project uses a pretrained audio-language model, Microsoft CLAP.
-
-The main focus is to investigate how much labelled animal audio is needed to improve classification performance.
-
-Noise augmentation will also be tested to determine whether it is useful when only a small amount of labelled training data is available.
-
-## Research Question
-
+## Research question
 How much labelled animal audio is required to adapt a pretrained audio-language model to animal sound classification, and does noise augmentation provide additional benefit when labelled data are scarce?
 
 ## Dataset
-
-The ESC-50 dataset will be used.
-
-This project focuses on the following ten animal sound categories:
+The ESC-50 dataset is used, with the following 10 animal sound categories:
 
 - dog
 - rooster
@@ -33,70 +19,52 @@ This project focuses on the following ten animal sound categories:
 - sheep
 - crow
 
-The official ESC-50 folds will be preserved for training, validation, and testing.
+The official ESC-50 fold structure is preserved. No new random train/test split is created.
 
-## Proposed Method
+## Model
+The main model is Microsoft CLAP. The model remains frozen and is used for:
 
-The main model is Microsoft CLAP (Contrastive Language-Audio Pretraining).
+- text embeddings
+- audio embeddings
+- zero-shot classification
+- feature extraction for few-shot classification
 
-The project contains three main stages.
+## Experimental pipeline
+### 1. CLAP validation
+The CLAP package is tested to confirm it loads successfully and can generate text embeddings from fixed category prompts.
 
-### 1. Zero-shot Classification
+### 2. ESC-50 preparation
+The ESC-50 metadata is loaded and filtered to the 10 animal classes. The class counts are checked to ensure each class contains 40 recordings, and the official fold assignments are preserved.
 
-ESC-50 audio → Pretrained CLAP → Text class prompts → Predicted animal class
+### 3. Zero-shot classification
+A held-out official ESC-50 fold is used as the test fold. Audio embeddings are extracted with CLAP and compared to the ten text embeddings for the chosen animal categories.
 
-No task-specific training is used in this stage.
+### 4. Few-shot classification
+A small linear classifier is trained on CLAP audio embeddings using a small number of labelled examples per class. The investigation includes n = 1, 2, 4, 8, 16, 24.
 
-The zero-shot result will be used as the baseline.
+### 5. Noise augmentation
+Noise augmentation is applied to the waveform before CLAP feature extraction. The goal is to test whether augmentation still helps when the amount of labelled data is limited.
 
-### 2. Few-shot Classification
-
-Audio → Pretrained CLAP → Audio Embedding → Small Classifier → Animal Class
-
-The CLAP model will be frozen.
-
-A simple classifier, such as logistic regression or a linear classifier, will be trained using CLAP audio embeddings.
-
-Different numbers of labelled examples per class will be tested:
-
-n = 1, 2, 4, 8, 16, 24
-
-The aim is to measure how classification performance changes as more labelled data are added.
-
-### 3. Noise Augmentation
-
-Noise augmentation will be applied to the audio waveform before extracting CLAP embeddings.
-
-Two representative low-data conditions will be tested:
-
-- 4 labelled examples per class
-- 16 labelled examples per class
-
-The results with and without noise augmentation will be compared.
-
-## Evaluation Metrics
-
-The following metrics will be used:
-
+## Evaluation metrics
 - Accuracy
-- Macro-F1 score
+- Macro-F1
 - Per-class recall
 - Confusion matrix
 
-The main final result will be a learning curve showing:
+## Preliminary results
+The zero-shot experiment on ESC-50 fold 5 achieved:
 
-Macro-F1 vs. Number of labelled examples per class
+- Accuracy: 0.9125
+- Macro-F1: 0.9029
 
-## Current
-Preliminary zero-shot result on ESC-50 fold 5:
+The main confusion was observed for the hen class, while most other animal categories were correctly recognised.
 
-Accuracy: 0.9125
-Macro-F1: 0.9029
-Main confusion was observed for hen, while most other animal categories were classified correctly.
-setup Python env
-install dependencies
-download ESC-50
-run CLAP test
-run dataset loader
-run zero-shot experiment
+## Repository contents
+- src/test_clap.py: verify CLAP loads and generates fixed text embeddings
+- src/load_esc50.py: load and filter ESC-50 metadata for the 10 animal categories
+- src/zero_shot.py: zero-shot CLAP classification on an official ESC-50 fold
+- results/: saved metric and confusion-matrix outputs
 
+## Notes
+- Raw ESC-50 audio files and the Python virtual environment are not uploaded to GitHub.
+- The project code and result files are intended for version control and reproducibility.

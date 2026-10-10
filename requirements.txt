@@ -1,0 +1,7 @@
+msclap
+numpy
+pandas
+scikit-learn
+soundfile
+torchaudio
+torchcodec
