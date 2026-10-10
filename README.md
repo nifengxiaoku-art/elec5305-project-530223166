@@ -87,22 +87,4 @@ The main final result will be a learning curve showing:
 
 Macro-F1 vs. Number of labelled examples per class
 
-## Current Work
 
-The current milestones are:
-
-- Load the ten ESC-50 animal classes
-- Preserve the official ESC-50 folds
-- Set up Microsoft CLAP
-- Run zero-shot classification
-- Calculate zero-shot accuracy and Macro-F1
-- Generate a confusion matrix
-- Extract and save CLAP audio embeddings
-- Train a few-shot classifier using 4 labelled examples per class
-- Compare zero-shot and few-shot performance
-
-## Optional Baseline
-
-A CNN trained on Mel-spectrograms may be retained as a conventional baseline for comparison.
-
-However, the main focus of this project is the pretrained CLAP representation and labelled-data efficiency.
