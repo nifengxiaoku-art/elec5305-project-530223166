@@ -1,0 +1,17 @@
+{
+  "categories": ["dog", "rooster", "pig", "cow", "frog", "cat", "hen", "insects", "sheep", "crow"],
+  "prompts": ["sound of a dog barking", "sound of a rooster", "sound of a pig", "sound of a cow", "sound of a frog", "sound of a cat", "sound of a hen", "sound of flying insects", "sound of a sheep", "sound of a crow"],
+  "version": "2023",
+  "checkpoint_repo": "microsoft/msclap",
+  "checkpoint_filename": "CLAP_weights_2023.pth",
+  "checkpoint_revision": "c47d441165daa21986ead0850660917636a81775",
+  "checkpoint_sha256": "2cef4016d47d00eb28d153d522f397222057f95000e9bad6b9583c631284a1e6",
+  "seeds": [17, 29, 43],
+  "n_values": [1, 2, 4, 8, 16, 24],
+  "augmentation_n": [4, 16],
+  "C_grid": [0.01, 0.1, 1, 10, 100],
+  "snr_db": 20.0,
+  "noise_seed": 20261112,
+  "batch_size": 4,
+  "torch_threads": 4
+}

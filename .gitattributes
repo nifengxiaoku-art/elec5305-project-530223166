@@ -1,0 +1,4 @@
+# Preserve scientific source/config bytes across platforms and Git clients.
+* -text
+*.png binary
+*.pdf binary
